@@ -4,19 +4,23 @@
 <md-card md-theme-watch ng-repeat="empresa in empresas">
     <md-card-title>
         <md-card-title-text>
-            <span class="md-headline">{{evento.nome}}</span>
-            <span class="md-subhead">{{evento.inicio |  date:'dd/MM/yyyy'}} até {{evento.fim |  date:'dd/MM/yyyy'}}</span>
+            <span class="md-headline">{{empresa.nome}}</span>
+            <span class="md-subhead">{{empresa.telefone}}</span>
+            <span class="md-subhead">{{empresa.instagram}}</span>
+            <span class="md-subhead">{{empresa.facebook}}</span>
         </md-card-title-text>
 
-        <!-- Listar Cronogramas -->
+        <!-- Mostrar no Mapa -->
         <md-card-actions layout="row">
             <md-card-icon-actions>
+              <!--
                 <md-button aria-label="Cronogramas" ui-sref="visitante.cronogramas({eventoId: evento.id})">
                     <ng-md-icon icon="list" size="48"></ng-md-icon>
                     <md-tooltip md-direction="bottom">
                         Cronogramas
                     </md-tooltip>
                 </md-button>
+              -->
             </md-card-icon-actions>
         </md-card-actions>
     </md-card-title>
