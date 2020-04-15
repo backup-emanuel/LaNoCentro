@@ -46,7 +46,28 @@ class LaNoCentroDb(object):
                 insert into tb_empresa(nome, id_endereco, email, telefone, instagram, facebook)
                 values(?, ?, ?, ?, ?, ?);
             """, (nome, id_endereco, email, telefone, instagram, facebook))
+            conn.commit()
 
+            id = cursor.lastrowid
+            empresa["id"] = id
+
+        except(mysql.connector.Error, Exception) as e:
+            logger.error("Aconteceu um erro.")
+            logger.error("Exceção: %s" % e)
+        finally:
+            if(self.db.conn):
+                conn.close()
+
+        return id
+
+    def setEndereco(self, endereco, logradouro, numero, complemento, cidade, estado, cep, ponto_referencia):
+        try:
+            cursor = self.db.conn.cursor()
+
+            cursor.execute("""
+                insert into tb_endereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
+                values(?, ?, ?, ?, ?, ?, ?);
+            """, (logradouro, numero, complemento, cidade, estado, cep, ponto_referencia))
             conn.commit()
 
             id = cursor.lastrowid

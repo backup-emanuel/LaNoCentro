@@ -74,23 +74,10 @@ def setEmpresa():
     instagram = empresa["instagram"]
     facebook = empresa["facebook"]
 
-    try:
-        conn = sqlite3.connect(DATABASE_NAME)
-        cursor = conn.cursor()
+    db = LaNoCentroDb()
+    id = db.setEmpresa(nome, id_endereco, email, telefone, instagram, facebook)
+    empresa["id"] = id
 
-        cursor.execute("""
-            insert into tb_empresa(nome, id_endereco, email, telefone, instagram, facebook)
-            values(?, ?, ?, ?, ?, ?);
-        """, (nome, id_endereco, email, telefone, instagram, facebook))
-        conn.commit()
-        id = cursor.lastrowid
-        empresa["id"] = id
-    except(sqlite3.Error, Exception) as e:
-        logger.error("Aconteceu um erro.")
-        logger.error("Exceção: %s" % e)
-    finally:
-        if conn:
-            conn.close()
     logger.info("Empresa cadastrada com sucesso.")
     return jsonify(empresa)
 
@@ -108,22 +95,10 @@ def setEndereco():
     cep = endereco["cep"]
     ponto_referencia = endereco["ponto_referencia"]
 
-    try:
-        conn = sqlite3.connect(DATABASE_NAME)
-        cursor = conn.cursor()
-        cursor.execute("""
-            insert into tb_endereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
-            values(?, ?, ?, ?, ?, ?, ?);
-        """, (logradouro, numero, complemento, cidade, estado, cep, ponto_referencia))
-        conn.commit()
-        id = cursor.lastrowid
-        endereco["id"] = id
-    except(sqlite3.Error, Exception) as e:
-        logger.error("Aconteceu um erro.")
-        logger.error("Exceção: %s" % e)
-    finally:
-        if conn:
-            conn.close()
+    db = LaNoCentroDb()
+    id = db.setEndereco(nome, id_endereco, email, telefone, instagram, facebook)
+    endereco["id"] = id
+
     logger.info("Endereço cadastrado com sucesso.")
     return jsonify(endereco)
 
@@ -229,5 +204,4 @@ def validation_error(e):
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 if(__name__ == '__main__'):
-    n = LaNoCentroDb()
     app.run(host='0.0.0.0', debug=True, use_reloader=True)
