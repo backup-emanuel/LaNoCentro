@@ -4,6 +4,7 @@ from flask import request
 from flask import jsonify
 from flask_json_schema import JsonSchema, JsonValidationError
 from flask_cors import CORS
+from Base import LaNoCentroDb
 import logging
 import sqlite3
 
@@ -228,4 +229,5 @@ def validation_error(e):
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 if(__name__ == '__main__'):
+    n = LaNoCentroDb()
     app.run(host='0.0.0.0', debug=True, use_reloader=True)

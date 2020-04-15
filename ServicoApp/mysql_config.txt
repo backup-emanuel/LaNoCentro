@@ -1,0 +1,6 @@
+Instalar o MySQL;
+
+Configurar o usuário root com a senha ifpbinfo;
+
+Configure o python3:
+  pip install mysql-connector-python;
