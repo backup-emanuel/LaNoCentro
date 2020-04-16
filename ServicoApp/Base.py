@@ -39,46 +39,28 @@ class LaNoCentroDb(object):
         self.db.CloseDb()
 
     def setEmpresa(self, nome, id_endereco, email, telefone, instagram, facebook):
-        try:
-            cursor = self.db.conn.cursor()
+        conn = self.db.conn
+        cursor = self.db.conn.cursor()
+        cursor.execute("""
+            insert into tb_empresa(nome, id_endereco, email, telefone, instagram, facebook)
+            values(?, ?, ?, ?, ?, ?);
+        """, (nome, id_endereco, email, telefone, instagram, facebook))
+        conn.commit()
 
-            cursor.execute("""
-                insert into tb_empresa(nome, id_endereco, email, telefone, instagram, facebook)
-                values(?, ?, ?, ?, ?, ?);
-            """, (nome, id_endereco, email, telefone, instagram, facebook))
-            conn.commit()
-
-            id = cursor.lastrowid
-            empresa["id"] = id
-
-        except(mysql.connector.Error, Exception) as e:
-            logger.error("Aconteceu um erro.")
-            logger.error("Exceção: %s" % e)
-        finally:
-            if(self.db.conn):
-                conn.close()
+        id = cursor.lastrowid
 
         return id
 
-    def setEndereco(self, endereco, logradouro, numero, complemento, cidade, estado, cep, ponto_referencia):
-        try:
-            cursor = self.db.conn.cursor()
+    def setEndereco(self, logradouro, numero, complemento, cidade, estado, cep, ponto_referencia):
+        conn = self.db.conn
+        cursor = self.db.conn.cursor()
+        cursor.execute("""
+            insert into tb_endereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
+            values(%s, %s, %s, %s, %s, %s, %s);
+        """, (logradouro, numero, complemento, cidade, estado, cep, ponto_referencia))
+        conn.commit()
 
-            cursor.execute("""
-                insert into tb_endereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
-                values(?, ?, ?, ?, ?, ?, ?);
-            """, (logradouro, numero, complemento, cidade, estado, cep, ponto_referencia))
-            conn.commit()
-
-            id = cursor.lastrowid
-            empresa["id"] = id
-
-        except(mysql.connector.Error, Exception) as e:
-            logger.error("Aconteceu um erro.")
-            logger.error("Exceção: %s" % e)
-        finally:
-            if(self.db.conn):
-                conn.close()
+        id = cursor.lastrowid
 
         return id
 

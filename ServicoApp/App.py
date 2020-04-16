@@ -5,6 +5,7 @@ from flask import jsonify
 from flask_json_schema import JsonSchema, JsonValidationError
 from flask_cors import CORS
 from Base import LaNoCentroDb
+import mysql.connector
 import logging
 import sqlite3
 
@@ -74,9 +75,18 @@ def setEmpresa():
     instagram = empresa["instagram"]
     facebook = empresa["facebook"]
 
-    db = LaNoCentroDb()
-    id = db.setEmpresa(nome, id_endereco, email, telefone, instagram, facebook)
-    empresa["id"] = id
+    lncdb = None
+    try:
+        lncdb = LaNoCentroDb()
+        id = lncdb.setEmpresa(nome, id_endereco, email, telefone, instagram, facebook)
+        empresa["id"] = id
+    except(mysql.connector.Error) as e:
+        logger.error("Aconteceu um erro.")
+        logger.error("Exceção: %s" % e)
+        return 404
+    finally:
+        if(lncdb):
+            lncdb.db.conn.close()
 
     logger.info("Empresa cadastrada com sucesso.")
     return jsonify(empresa)
@@ -95,9 +105,18 @@ def setEndereco():
     cep = endereco["cep"]
     ponto_referencia = endereco["ponto_referencia"]
 
-    db = LaNoCentroDb()
-    id = db.setEndereco(nome, id_endereco, email, telefone, instagram, facebook)
-    endereco["id"] = id
+    lncdb = None
+    try:
+        lncdb = LaNoCentroDb()
+        id = lncdb.setEndereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
+        endereco["id"] = id
+    except(mysql.connector.Error) as e:
+        logger.error("Aconteceu um erro na Endereço.")
+        logger.error("Exceção: %s" % e)
+        return 404
+    finally:
+        if(lncdb):
+            lncdb.db.conn.close()
 
     logger.info("Endereço cadastrado com sucesso.")
     return jsonify(endereco)
