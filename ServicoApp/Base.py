@@ -43,7 +43,7 @@ class LaNoCentroDb(object):
         cursor = self.db.conn.cursor()
         cursor.execute("""
             insert into tb_empresa(nome, id_endereco, email, telefone, instagram, facebook)
-            values(?, ?, ?, ?, ?, ?);
+            values(%s, %d, %s, %s, %s, %s);
         """, (nome, id_endereco, email, telefone, instagram, facebook))
         conn.commit()
 
