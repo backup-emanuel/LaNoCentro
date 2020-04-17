@@ -1,3 +1,18 @@
+<form name="empresaForm">
+	<div class="form-group">
+		<!-- Nome -->
+		<label for='nome'> Nome: </label>
+		<input type='text' name='nome' class="form-control" ng-model="empresa.nome" ng-minlength="3" ng-maxlength="25">
+	</div>
+
+	<!-- Botões -->
+	<button type='reset' ng-click="limparBusca()" name='limpar' class="btn btn-secondary btn-lg btn-block">
+		Limpar
+	</button>
+	<button ng-click="listar()" class="btn btn-dark btn-lg btn-block">
+		Listar
+	</button>
+</form>
 <div class="container-contact100">
 	<!-- Cards de Eventos -->
 	<md-card md-theme-watch ng-repeat="empresa in empresas">

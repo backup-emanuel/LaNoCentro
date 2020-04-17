@@ -725,3 +725,8 @@ textarea.input100 {
     padding: 15px 0px 0 0px;
   }
 }
+
+#footer-img-dev {
+  margin: auto;
+  width: 80%;
+}
