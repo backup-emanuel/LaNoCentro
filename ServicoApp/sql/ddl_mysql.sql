@@ -1,0 +1,44 @@
+CREATE TABLE tb_contato(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(255) NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	telefone VARCHAR(13) NOT NULL
+	);
+
+CREATE TABLE tb_endereco(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	logradouro VARCHAR(65) NOT NULL,
+	numero VARCHAR(4) NOT NULL,
+	complemento VARCHAR(45) NULL,
+	cidade VARCHAR(45) NOT NULL,
+	estado VARCHAR(45) NOT NULL,
+	cep VARCHAR(8) NOT NULL,
+	ponto_referencia VARCHAR(65) NULL
+	);
+    
+CREATE TABLE tb_empresa(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(45) NOT NULL,
+	natureza VARCHAR(255) NOT NULL,
+	fk_id_endereco INTEGER NOT NULL,
+	email VARCHAR(255) NOT NULL,
+	telefone VARCHAR(13) NOT NULL
+	instagram VARCHAR(255) NULL,
+	facebook VARCHAR(255) NULL,
+	FOREIGN KEY(fk_id_endereco) REFERENCES tb_endereco(id)
+	);
+    
+CREATE TABLE tb_produto(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(45) NOT NULL,
+	descricao VARCHAR(45) NOT NULL,
+	preco NUMERIC(12,2) NOT NULL
+	);
+    
+CREATE TABLE tb_empresa_produto(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	fk_id_empresa INTEGER NOT NULL,
+	fk_id_produto INTEGER NOT NULL,
+	FOREIGN KEY(fk_id_empresa) REFERENCES tb_empresa(id),
+	FOREIGN KEY(fk_id_produto) REFERENCES tb_produto(id)
+	);

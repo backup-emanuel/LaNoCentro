@@ -1,226 +1,46 @@
-# importações
-from flask import Flask
-from flask import request
-from flask import jsonify
-from flask_json_schema import JsonSchema, JsonValidationError
+from flask import Flask, Blueprint
+from flask_restful import Api
 from flask_cors import CORS
-from Base import LaNoCentroDb
-import mysql.connector
-import logging
-import sqlite3
+from common.settings import *
+from common.logging import *
+from resources.endereco import *
+from resources.contato import *
+from resources.empresa import *
 
 app = Flask(__name__)
 
-# Logging
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-handler = logging.FileHandler("appComerciante.log")
+# Settings
+app.config['DEBUG'] = DEBUG
+app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = SQLALCHEMY_TRACK_MODIFICATIONS
+app.config['SQLALCHEMY_BINDS'] = SQLALCHEMY_BINDS
+
+# Configure logging
+handler = logging.FileHandler(LOGGING_LOCATION)
+handler.setLevel(LOGGING_LEVEL)
+formatter = logging.Formatter(LOGGING_FORMAT)
 handler.setFormatter(formatter)
-logger = app.logger
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+app.logger.addHandler(handler)
 
-# validação
-schema = JsonSchema()
-schema.init_app(app)
+db.init_app(app)
 
-# schema do empresa
-empresa_schema = {
-    "required": ["nome", "id_endereco", "email", "telefone", "instagram", "facebook"],
-    "properties": {
-        "nome" : {"type" : "string"},
-        "id_endereco" : {"type" : "integer"},
-        "email" : {"type" : "string"},
-        "telefone" : {"type" : "string"},
-        "instagram" : {"type" : "string"},
-        "facebook" : {"type" : "string"}
-    }
-}
+api_bp = Blueprint('api', __name__)
+api = Api(api_bp, prefix='/lanocentro/api')
 
-# schema do endereço
-endereco_schema = {
-    "required": ["logradouro","numero", "cidade", "estado", "cep"],
-    "properties": {
-        "logradouro" : {"type" : "string"},
-        "numero" : {"type" : "string"},
-        "complemento" : {"type" : "string"},
-        "cidade" : {"type" : "string"},
-        "estado" : {"type" : "string"},
-        "cep" : {"type" : "string"},
-        "ponto_referencia" : {"type" : "string"}
-    }
-}
+# Recursos
+api.add_resource(EnderecosResource, '/enderecos')
+api.add_resource(EnderecoResource, '/enderecos/<endereco_id>')
 
-# schema do produto
-produto_schema = {
-    "required": ["nome", "descricao", "preco"],
-    "properties": {
-        "nome" : {"type" : "string"},
-        "descricao" : {"type" : "string"},
-        "preco" : {"type" : "string"}
-    }
-}
+api.add_resource(ContatosResource, '/contatos')
+api.add_resource(ContatoResource, '/contatos/<contato_id>')
 
-DATABASE_NAME ="App_Comerciante.db"
+api.add_resource(EmpresasResource, '/empresas')
 
-# cadastrar empresa
-@app.route("/empresa", methods = ["POST"])
-@schema.validate(empresa_schema)
-def setEmpresa():
-    logger.info("Cadastrando empresa.")
-    empresa = request.get_json()
-    nome = empresa["nome"]
-    id_endereco = empresa["id_endereco"]
-    email = empresa["email"]
-    telefone = empresa["telefone"]
-    instagram = empresa["instagram"]
-    facebook = empresa["facebook"]
+# Blueprints para Restful.
+app.register_blueprint(api_bp)
 
-    lncdb = None
-    try:
-        lncdb = LaNoCentroDb()
-        id = lncdb.setEmpresa(nome, id_endereco, email, telefone, instagram, facebook)
-        empresa["id"] = id
-    except(mysql.connector.Error) as e:
-        logger.error("Aconteceu um erro.")
-        logger.error("Exceção: %s" % e)
-        return 404
-    finally:
-        if(lncdb):
-            lncdb.db.conn.close()
+# CORS - requisição multi-clients
+cors = CORS(app, resources={r"/lanocentro/api/*": {"origins": "*"}})
 
-    logger.info("Empresa cadastrada com sucesso.")
-    return jsonify(empresa)
-
-# cadastrar endereço
-@app.route("/endereco", methods = ["POST"])
-@schema.validate(endereco_schema)
-def setEndereco():
-    logger.info("Cadastrando endereço.")
-    endereco = request.get_json()
-    logradouro = endereco["logradouro"]
-    numero = endereco["numero"]
-    complemento = endereco["complemento"]
-    cidade = endereco["cidade"]
-    estado = endereco["estado"]
-    cep = endereco["cep"]
-    ponto_referencia = endereco["ponto_referencia"]
-
-    lncdb = None
-    try:
-        lncdb = LaNoCentroDb()
-        id = lncdb.setEndereco(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
-        endereco["id"] = id
-    except(mysql.connector.Error) as e:
-        logger.error("Aconteceu um erro na Endereço.")
-        logger.error("Exceção: %s" % e)
-        return 404
-    finally:
-        if(lncdb):
-            lncdb.db.conn.close()
-
-    logger.info("Endereço cadastrado com sucesso.")
-    return jsonify(endereco)
-
-# cadastrar produto
-@app.route("/produto", methods = ["POST"])
-@schema.validate(produto_schema)
-def setProduto():
-    logger.info("Cadastrando produto.")
-    produto = request.get_json()
-    nome = produto["nome"]
-    descricao = produto["descricao"]
-    preco = produto["preco"]
-
-    try:
-        conn = sqlite3.connect(DATABASE_NAME)
-        cursor = conn.cursor()
-
-        cursor.execute("""
-            insert into tb_produto(nome, descricao, preco)
-            values(?, ?, ?);
-        """, (nome, descricao, preco))
-        conn.commit()
-        id = cursor.lastrowid
-        produto["id"] = id
-    except(sqlite3.Error, Exception) as e:
-        logger.error("Aconteceu um erro.")
-        logger.error("Exceção: %s" % e)
-    finally:
-        if conn:
-            conn.close()
-    logger.info("Produto cadastrado com sucesso.")
-    return jsonify(produto)
-
-# listar empresas
-@app.route("/empresas",  methods = ["GET"])
-def getEmpresas():
-    logger.info("Listando empresas.")
-    try:
-        conn = sqlite3.connect(DATABASE_NAME)
-        cursor = conn.cursor()
-        cursor.execute("""
-            select empresa.id_empresa,
-                empresa.nome,
-                endereco.logradouro,
-                endereco.numero,
-                endereco.complemento,
-                endereco.cidade,
-                endereco.estado,
-                endereco.cep,
-                endereco.ponto_referencia,
-                empresa.email,
-                empresa.telefone,
-                empresa.instagram,
-                empresa.facebook
-            from tb_empresa as empresa
-            inner join tb_endereco as endereco
-                on(empresa.id_endereco = endereco.id_endereco);
-        """)
-        empresas = []
-        for linha in cursor.fetchall():
-            endereco = {
-                "logradouro" : linha[2],
-                "numero" : linha[3],
-                "complemento" : linha[4],
-                "cidade" : linha[5],
-                "estado" : linha[6],
-                "cep" : linha[7],
-                "ponto_referencia" : linha[8],
-            }
-
-            empresa = {
-                "id" : linha[0],
-                "nome" : linha[1],
-                "endereco" : endereco,
-                "email" : linha[9],
-                "telefone" : linha[10],
-                "instagram" : linha[11],
-                "facebook" : linha[12]
-            }
-            empresas.append(empresa)
-        conn.close()
-    except(sqlite3.Error):
-         logger.error("Aconteceu um erro.")
-    logger.info("Empresas listadas com sucesso.")
-    return jsonify(empresas)
-
-# Mensagem de erro para recurso não encontrado.
-@app.errorhandler(404)
-def not_found(error=None):
-    message = {
-            'status': 404,
-            'message': 'Not Found: ' + request.url,
-    }
-    resp = jsonify(message)
-    resp.status_code = 404
-
-    return resp
-
-@app.errorhandler(JsonValidationError)
-def validation_error(e):
-    return jsonify({ 'error': e.message, 'errors': [validation_error.message for validation_error  in e.errors]}), 400
-
-cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-if(__name__ == '__main__'):
-    app.run(host='0.0.0.0', debug=True, use_reloader=True)
+if __name__ == '__main__':
+    app.run(threaded=True)
