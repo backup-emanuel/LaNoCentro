@@ -22,7 +22,7 @@ CREATE TABLE tb_empresa(
 	natureza VARCHAR(255) NOT NULL,
 	fk_id_endereco INTEGER NOT NULL,
 	email VARCHAR(255) NOT NULL,
-	telefone VARCHAR(13) NOT NULL
+	telefone VARCHAR(13) NOT NULL,
 	instagram VARCHAR(255) NULL,
 	facebook VARCHAR(255) NULL,
 	FOREIGN KEY(fk_id_endereco) REFERENCES tb_endereco(id)
