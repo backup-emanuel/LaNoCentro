@@ -53,4 +53,4 @@ class EmpresasResource(Resource):
             current_app.logger.error("Exceção")
             return 404
 
-        return 204
+        return marshal(empresa, empresa_campos), 201
