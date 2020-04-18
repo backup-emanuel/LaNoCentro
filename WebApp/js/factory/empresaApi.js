@@ -1,10 +1,10 @@
 // Empresas - Factory
-var empresaFactory = function($http) {
+var empresaFactory = function($http, serviceCfg) {
 
-  var baseUrl = "http://127.0.0.1:5000";
+  var baseUrl = serviceCfg.baseUrl();
 
   var _cadastrar = function(empresa) {
-    return $http.post(baseUrl + "/empresa", empresa);
+    return $http.post(baseUrl + "/empresas", empresa);
   };
 
   var _listar = function() {

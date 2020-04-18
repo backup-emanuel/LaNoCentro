@@ -1,5 +1,5 @@
 var empresaController = function($scope, $mdToast, $state,
-  empresaApi, enderecoApi) {
+  empresaApi, enderecoApi, serviceCfg) {
 
   $scope.empresa = {};
   $scope.endereco = {};
@@ -14,8 +14,10 @@ var empresaController = function($scope, $mdToast, $state,
         let empresa = angular.copy($scope.empresa);
 
         // Id do endereco
-        endereco = response.data;
-        empresa.id_endereco = endereco.id;
+        enderecoResponse = response.data;
+        let endereco = {};
+        endereco.id = enderecoResponse.id;
+        empresa.endereco = endereco;
 
         // Cadastrar empresa com o endereço
         cadastrarEmpresa(empresa);
