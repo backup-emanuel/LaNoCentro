@@ -4,7 +4,7 @@ var empresaFactory = function($http, serviceCfg) {
   var baseUrl = serviceCfg.baseUrl();
 
   var _cadastrar = function(empresa) {
-    return $http.post(baseUrl + "/empresas", empresa);
+    return $http.post(baseUrl + "lanocentro/api/empresas", empresa);
   };
 
   var _listar = function() {
