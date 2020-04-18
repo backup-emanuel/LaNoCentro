@@ -4,7 +4,7 @@ var empresaFactory = function($http) {
   var baseUrl = "http://127.0.0.1:5000";
 
   var _cadastrar = function(empresa) {
-    return $http.post(baseUrl + "/empresa", empresa);
+    return $http.post(baseUrl + "lanocentro/api/empresas", empresa);
   };
 
   var _listar = function() {
