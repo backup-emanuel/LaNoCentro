@@ -25,6 +25,7 @@ class EnderecosResource(Resource):
     # POST /enderecos
     def post(self):
         current_app.logger.info("Post - Endereço")
+        endereco = None
         try:
             # Parser JSON
             args = parser.parse_args()
@@ -49,7 +50,7 @@ class EnderecosResource(Resource):
             current_app.logger.error("Exceção")
             return 500
 
-        return 204
+        return marshal(endereco, endereco_campos), 201
 
 
 class EnderecoResource(Resource):
