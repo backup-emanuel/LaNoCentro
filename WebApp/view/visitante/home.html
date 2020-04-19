@@ -1,129 +1,296 @@
+<!--Main layout-->
+<main class="mt-5">
+    <div class="container">
 
-<md-content flex layout-padding>
-  <h1>Objetivo</h1>
-  <p>
-    Agreguar informações de pequenos comerciantes e entregadores permitindo aos consumidores encontrem fornecedores de itens básicos de consumo sem a necessidade de sair de casa.
-  </p>
-  <h1>Parceria</h1>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus erat vel consectetur aliquet. Ut eget ultrices lorem. Nulla ultrices quam nisl, at lobortis leo tincidunt id. Donec lobortis congue lacinia. Suspendisse potenti. Mauris vel pharetra erat. Aenean vel elit vitae eros varius fermentum sed sed nisl.</p>
-  <md-card>
-    <md-table-container>
-      <!-- Cabeçalho de opções -->
-      <md-card-header>
-        <md-card-avatar>
-          <ng-md-icon icon="school" size="42"></ng-md-icon>
-        </md-card-avatar>
+        <!--Section: Best Features-->
+        <section id="best-features" class="text-center">
 
-        <md-card-header-text>
-          <span class="md-title">Empresa</span>
-          <span class="md-subhead">
-            Digite a Empresa no campo abaixo para buscar.
-          </span>
-        </md-card-header-text>
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold">Objetivo</h2>
 
-        <md-card-actions layout="row">
-          <md-card-icon-actions>
-          </md-card-icon-actions>
-        </md-card-actions>
-      </md-card-header>
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center mb-4">
 
-      <md-toolbar class="md-table-toolbar md-default">
-        <div class="md-toolbar-tools">
+                <!--Grid column-->
+                <div class="col-md-8">
 
-          <ng-md-icon icon="search" size="32"></ng-md-icon>
+                    <!-- Description -->
+                    <p class="grey-text">Agreguar informações de pequenos comerciantes e entregadores permitindo aos consumidores encontrem fornecedores de itens básicos de consumo sem a necessidade de sair de casa.</p>
 
-          <div class="toolbar-input" flex>
-            <input type="text" ng-model="nome" ng-keyup="pesquisar(nome)" placeholder="Empresa">
-          </div>
+                </div>
+                <!--Grid column-->
 
-          <md-button aria-label="Limpar Busca" ng-click="limparBusca()">
-            <md-tooltip md-direction="bottom">Limpar Busca</md-tooltip>
-            <ng-md-icon icon="clear" size="32"></ng-md-icon>
-          </md-button>
-        </div>
-      </md-toolbar>
+            </div>
+            <!--Grid row-->
 
-      <!-- Tabela -->
-      <table md-table md-row-select ng-model="selectedCras">
-        <thead md-head>
-          <tr md-row>
-            <th md-column>Nome</th>
-            <th md-column>Natureza</th>
-            <th md-column>Telefone</th>
-            <th md-column>E-mail</th>
-            <th md-column>Facebook</th>
-            <th md-column>Instagran</th>
-          </tr>
-        </thead>
+        </section>
+        <!--Section: Best Features-->
 
-        <tbody md-body>
-          <tr ng-repeat="empresa in empresas">
-            <td md-cell>{{empresa.nome | uppercase}}</td>
-            <td md-cell>{{empresa.natureza | uppercase}}</td>
-            <td md-cell>{{empresa.telefone | uppercase}}</td>
-            <td md-cell>{{empresa.email | uppercase}}</td>
-            <td md-cell>{{empresa.facebook | uppercase}}</td>
-            <td md-cell>{{empresa.instagran | uppercase}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </md-table-container>
-    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{empregos.length}}" md-page-select></md-table-pagination>
-  </md-card>
+        <hr class="my-5">
 
-  <!-- Contato -->
-  <md-card>
-    <md-card-header>
-      <md-card-avatar>
-        <ng-md-icon icon="school" size="42"></ng-md-icon>
-      </md-card-avatar>
+        <!--Section: Examples-->
+        <section id="examples" class="text-center">
 
-      <md-card-header-text>
-        <span class="md-title">Contato</span>
-        <span class="md-subhead">Preencha o formulário para entrar em contato com nossa equipe. Clique nesse botão Enviar para finalizar.</span>
-      </md-card-header-text>
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold">Parcerias</h2>
 
-      <!-- Salvar alterações -->
-      <md-card-icon-actions>
-        <md-button aria-label="Enviar dados de Contato." ng-click="enviarContato()">
-          <md-tooltip md-direction="bottom">
-            Enviar dos dados de Contato.
-          </md-tooltip>
-          <ng-md-icon icon="save" size="42"></ng-md-icon>
-        </md-button>
-      </md-card-icon-actions>
+            <!--Grid row-->
+            <div class="row">
 
-    </md-card-header>
-    <md-card-content layout="column">
-      <form name="enviarContatoForm" layout="column" novalidate>
-        <!-- Nome -->
-        <md-input-container class="md-icon-float md-block">
-          <label>Nome</label>
-          <input ng-model="contato.nome" name="nome" type="text" required>
-          <div ng-messages="enviarContatoForm.nome.$error" role="alert">
-            <div ng-messages-include="messages.html"></div>
-          </div>
-        </md-input-container>
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
 
-        <!-- Telefone -->
-        <md-input-container class="md-icon-float md-block">
-          <label>Telefone (Whatsapp)</label>
-          <input ng-model="contato.telefone" name="telefone" type="text" ng-pattern="/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/"
-            required>
-          <div ng-messages="enviarContatoForm.telefone.$error" role="alert">
-            <div ng-messages-include="messages.html"></div>
-          </div>
-        </md-input-container>
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
 
-        <!-- Email -->
-        <md-input-container class="md-icon-float md-block">
-          <label>E-mail</label>
-          <input ng-model="contato.email" name="email" type="email" ng-pattern="/^.+@.+\..+$/" required>
-          <div ng-messages="enviarContatoForm.email.$error" role="alert">
-            <div ng-messages-include="messages.html"></div>
-          </div>
-        </md-input-container>
-      </form>
-    </md-card-content>
-  </md-card>
-</md-content>
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/49.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/29.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row">
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/11.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="view overlay z-depth-1-half">
+                        <img src="https://mdbootstrap.com/img/Photos/Others/images/13.jpg" class="img-fluid" alt="">
+                        <div class="mask rgba-white-slight"></div>
+                    </div>
+
+                    <h4 class="my-4 font-weight-bold">Heading</h4>
+                    <p class="grey-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit
+                        maiores nam,
+                        aperiam minima
+                        assumenda deleniti hic.</p>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Examples-->
+
+        <hr class="my-5">
+
+        <!--Section: Gallery-->
+        <section id="gallery">
+
+            <!-- Heading -->
+            <h2 class="mb-5 font-weight-bold text-center">Lista de Comerciantes</h2>
+
+            <!--Grid row-->
+            <md-card>
+              <md-table-container>
+                <!-- Cabeçalho de opções -->
+                <md-card-header>
+                  <md-card-avatar>
+                    <ng-md-icon icon="school" size="42"></ng-md-icon>
+                  </md-card-avatar>
+
+                  <md-card-header-text>
+                    <span class="md-title">Empresa</span>
+                    <span class="md-subhead">
+                      Digite a Empresa no campo abaixo para buscar.
+                    </span>
+                  </md-card-header-text>
+
+                  <md-card-actions layout="row">
+                    <md-card-icon-actions>
+                    </md-card-icon-actions>
+                  </md-card-actions>
+                </md-card-header>
+
+                <md-toolbar class="md-table-toolbar md-default">
+                  <div class="md-toolbar-tools">
+
+                    <ng-md-icon icon="search" size="32"></ng-md-icon>
+
+                    <div class="toolbar-input" flex>
+                      <input type="text" ng-model="nome" ng-keyup="pesquisar(nome)" placeholder="Empresa">
+                    </div>
+
+                    <md-button aria-label="Limpar Busca" ng-click="limparBusca()">
+                      <md-tooltip md-direction="bottom">Limpar Busca</md-tooltip>
+                      <ng-md-icon icon="clear" size="32"></ng-md-icon>
+                    </md-button>
+                  </div>
+                </md-toolbar>
+
+                <!-- Tabela -->
+                <table md-table md-row-select ng-model="selectedCras">
+                  <thead md-head>
+                    <tr md-row>
+                      <th md-column>Nome</th>
+                      <th md-column>Natureza</th>
+                      <th md-column>Telefone</th>
+                      <th md-column>E-mail</th>
+                      <th md-column>Facebook</th>
+                      <th md-column>Instagran</th>
+                    </tr>
+                  </thead>
+
+                  <tbody md-body>
+                    <tr ng-repeat="empresa in empresas">
+                      <td md-cell>{{empresa.nome | uppercase}}</td>
+                      <td md-cell>{{empresa.natureza | uppercase}}</td>
+                      <td md-cell>{{empresa.telefone | uppercase}}</td>
+                      <td md-cell>{{empresa.email | uppercase}}</td>
+                      <td md-cell>{{empresa.facebook | uppercase}}</td>
+                      <td md-cell>{{empresa.instagran | uppercase}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </md-table-container>
+              <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{empregos.length}}" md-page-select></md-table-pagination>
+            </md-card>
+            <!--Grid row-->
+
+        </section>
+        <!--Section: Gallery-->
+
+        <hr class="my-5">
+
+        <!--Section: Contact-->
+        <section id="contact">
+          <!-- Contato -->
+          <md-card>
+            <md-card-header>
+              <md-card-avatar>
+                <ng-md-icon icon="school" size="42"></ng-md-icon>
+              </md-card-avatar>
+
+              <md-card-header-text>
+                <span class="md-title">Contato</span>
+                <span class="md-subhead">Preencha o formulário para entrar em contato com nossa equipe. Clique nesse botão Enviar para finalizar.</span>
+              </md-card-header-text>
+
+              <!-- Salvar alterações -->
+              <md-card-icon-actions>
+                <md-button aria-label="Enviar dados de Contato." ng-click="enviarContato()">
+                  <md-tooltip md-direction="bottom">
+                    Enviar dos dados de Contato.
+                  </md-tooltip>
+                  <ng-md-icon icon="save" size="42"></ng-md-icon>
+                </md-button>
+              </md-card-icon-actions>
+
+            </md-card-header>
+            <md-card-content layout="column">
+              <form name="enviarContatoForm" layout="column" novalidate>
+                <!-- Nome -->
+                <md-input-container class="md-icon-float md-block">
+                  <label>Nome</label>
+                  <input ng-model="contato.nome" name="nome" type="text" required>
+                  <div ng-messages="enviarContatoForm.nome.$error" role="alert">
+                    <div ng-messages-include="messages.html"></div>
+                  </div>
+                </md-input-container>
+
+                <!-- Telefone -->
+                <md-input-container class="md-icon-float md-block">
+                  <label>Telefone (Whatsapp)</label>
+                  <input ng-model="contato.telefone" name="telefone" type="text" ng-pattern="/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/"
+                    required>
+                  <div ng-messages="enviarContatoForm.telefone.$error" role="alert">
+                    <div ng-messages-include="messages.html"></div>
+                  </div>
+                </md-input-container>
+
+                <!-- Email -->
+                <md-input-container class="md-icon-float md-block">
+                  <label>E-mail</label>
+                  <input ng-model="contato.email" name="email" type="email" ng-pattern="/^.+@.+\..+$/" required>
+                  <div ng-messages="enviarContatoForm.email.$error" role="alert">
+                    <div ng-messages-include="messages.html"></div>
+                  </div>
+                </md-input-container>
+              </form>
+            </md-card-content>
+          </md-card>
+        </section>
+        <!--Section: Contact-->
+
+    </div>
+</main>
+<!--Main layout-->
