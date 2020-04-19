@@ -16,7 +16,7 @@ class CidadesResource(Resource):
         return cidades, 200
 
 class CidadeResource(Resource):
-    # GET /salas/<id>
+    # GET /cidades/<id>
     @marshal_with(cidade_campos)
     def get(self, cidade_id):
         current_app.logger.info("Get - Cidade: %s" % cidade_id)
