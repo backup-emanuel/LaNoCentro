@@ -6,9 +6,9 @@ app.value("serviceCfg", {
 	baseUrl: function() {
 
 		var _protocol = "//"
-		var _hostAddress = "mobile-aceite.tcu.gov.br";
-		var _port = "80";
-		var _context = "/mapa-da-saude";
+		var _hostAddress = "localhost";
+		var _port = "5000";
+		var _context = "/lanocentro/api";
 
 		return _protocol + _hostAddress + ":" + _port + _context;
 	}
