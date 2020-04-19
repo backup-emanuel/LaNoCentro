@@ -6,6 +6,7 @@ from common.logging import *
 from resources.endereco import *
 from resources.contato import *
 from resources.empresa import *
+from resources.cidade import *
 
 app = Flask(__name__)
 
@@ -35,6 +36,9 @@ api.add_resource(ContatosResource, '/contatos')
 api.add_resource(ContatoResource, '/contatos/<contato_id>')
 
 api.add_resource(EmpresasResource, '/empresas')
+
+api.add_resource(CidadesResource, '/cidades')
+api.add_resource(CidadeResource, '/cidades/<cidade_id>')
 
 # Blueprints para Restful.
 app.register_blueprint(api_bp)
