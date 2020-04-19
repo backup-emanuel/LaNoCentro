@@ -29,7 +29,18 @@ var homeController = function($scope, $mdToast, empresaApi) {
     }
   };
 
+  $scope.enviarContato = function() {
+    console.log("enviando contato.");
+  }
+
   $scope.listar();
+
+  // Paginação da tabela.
+  $scope.query = {
+        order: 'municipio',
+        limit: 8,
+        page: 1
+    };
 }
 
 app.controller('HomeController', homeController);

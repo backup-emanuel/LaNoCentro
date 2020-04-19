@@ -1,27 +1,123 @@
 <h1>Visitante - Home</h1>
+<md-content flex layout-padding>
+  <md-card>
+    <md-table-container>
+      <!-- Cabeçalho de opções -->
+      <md-card-header>
+        <md-card-avatar>
+          <ng-md-icon icon="school" size="42"></ng-md-icon>
+        </md-card-avatar>
 
-<!-- Cards de Eventos -->
-<md-card md-theme-watch ng-repeat="empresa in empresas">
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-headline">{{empresa.nome}}</span>
-      <span class="md-subhead">{{empresa.telefone}}</span>
-      <span class="md-subhead">{{empresa.instagram}}</span>
-      <span class="md-subhead">{{empresa.facebook}}</span>
-    </md-card-title-text>
+        <md-card-header-text>
+          <span class="md-title">Empresa</span>
+          <span class="md-subhead">
+            Digite a Empresa no campo abaixo para buscar.
+          </span>
+        </md-card-header-text>
 
-    <!-- Mostrar no Mapa -->
-    <md-card-actions layout="row">
+        <md-card-actions layout="row">
+          <md-card-icon-actions>
+          </md-card-icon-actions>
+        </md-card-actions>
+      </md-card-header>
+
+      <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+
+          <ng-md-icon icon="search" size="32"></ng-md-icon>
+
+          <div class="toolbar-input" flex>
+            <input type="text" ng-model="nome" ng-keyup="pesquisar(nome)" placeholder="Empresa">
+          </div>
+
+          <md-button aria-label="Limpar Busca" ng-click="limparBusca()">
+            <md-tooltip md-direction="bottom">Limpar Busca</md-tooltip>
+            <ng-md-icon icon="clear" size="32"></ng-md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+
+      <!-- Tabela -->
+      <table md-table md-row-select ng-model="selectedCras">
+        <thead md-head>
+          <tr md-row>
+            <th md-column>Nome</th>
+            <th md-column>Natureza</th>
+            <th md-column>Telefone</th>
+            <th md-column>E-mail</th>
+            <th md-column>Facebook</th>
+            <th md-column>Instagran</th>
+          </tr>
+        </thead>
+
+        <tbody md-body>
+          <tr ng-repeat="empresa in empresas">
+            <td md-cell>{{empresa.nome | uppercase}}</td>
+            <td md-cell>{{empresa.natureza | uppercase}}</td>
+            <td md-cell>{{empresa.telefone | uppercase}}</td>
+            <td md-cell>{{empresa.email | uppercase}}</td>
+            <td md-cell>{{empresa.facebook | uppercase}}</td>
+            <td md-cell>{{empresa.instagran | uppercase}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+    <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{empregos.length}}" md-page-select></md-table-pagination>
+  </md-card>
+
+  <!-- Contato -->
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <ng-md-icon icon="school" size="42"></ng-md-icon>
+      </md-card-avatar>
+
+      <md-card-header-text>
+        <span class="md-title">Contato</span>
+        <span class="md-subhead">Preencha o formulário para entrar em contato com nossa equipe. Clique nesse botão Salvar para enviar os dados.</span>
+      </md-card-header-text>
+
+      <!-- Salvar alterações -->
       <md-card-icon-actions>
-        <!--
-                <md-button aria-label="Cronogramas" ui-sref="visitante.cronogramas({eventoId: evento.id})">
-                    <ng-md-icon icon="list" size="48"></ng-md-icon>
-                    <md-tooltip md-direction="bottom">
-                        Cronogramas
-                    </md-tooltip>
-                </md-button>
-              -->
+        <md-button aria-label="Enviar dados de Contato." ng-click="enviarContato()">
+          <md-tooltip md-direction="bottom">
+            Enviar dos dados de Contato.
+          </md-tooltip>
+          <ng-md-icon icon="save" size="42"></ng-md-icon>
+        </md-button>
       </md-card-icon-actions>
-    </md-card-actions>
-  </md-card-title>
-</md-card>
+
+    </md-card-header>
+    <md-card-content layout="column">
+      <form name="enviarContatoForm" layout="column" novalidate>
+        <!-- Nome -->
+        <md-input-container class="md-icon-float md-block">
+          <label>Nome</label>
+          <input ng-model="contato.nome" name="nome" type="text" required>
+          <div ng-messages="enviarContatoForm.nome.$error" role="alert">
+            <div ng-messages-include="messages.html"></div>
+          </div>
+        </md-input-container>
+
+        <!-- Telefone -->
+        <md-input-container class="md-icon-float md-block">
+          <label>Telefone (Whatsapp)</label>
+          <input ng-model="contato.telefone" name="telefone" type="text" ng-pattern="/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/"
+            required>
+          <div ng-messages="enviarContatoForm.telefone.$error" role="alert">
+            <div ng-messages-include="messages.html"></div>
+          </div>
+        </md-input-container>
+
+        <!-- Email -->
+        <md-input-container class="md-icon-float md-block">
+          <label>E-mail</label>
+          <input ng-model="contato.email" name="email" type="email" ng-pattern="/^.+@.+\..+$/" required>
+          <div ng-messages="enviarContatoForm.email.$error" role="alert">
+            <div ng-messages-include="messages.html"></div>
+          </div>
+        </md-input-container>
+      </form>
+    </md-card-content>
+  </md-card>
+</md-content>
