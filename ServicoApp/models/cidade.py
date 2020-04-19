@@ -19,7 +19,7 @@ class CidadeModel(db.Model):
     nome = db.Column(db.String(255))
 
     def __init__(self, nome):
-        self.cidade = cidade
+        self.nome = nome
 
     def __str__(self):
         return '<Cidade %s>'%(self.cidade)
