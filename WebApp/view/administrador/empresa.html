@@ -1,149 +1,129 @@
-<div class="container-contact100">
-  <div class="wrap-contact100">
-    <form class="contact100-form validate-form" name="empresaForm">
-      <!--========================== Campo Nome Completo ==========================-->
-      <div class="wrap-input100 validate-input bg1" data-validate="Por favor digite o nome da empresa aqui!">
-        <span class="label-input100">Nome Empresa *</span>
-        <input class="input100" type="text" name="nome"
-          placeholder="Digite aqui o nome da empresa, por favor!"
-          ng-model="empresa.nome" required>
-      </div>
-      <!--========================== Campo Nome Completo ==========================-->
+<form name="empresaForm">
+  <div class="form-row">
 
-      <!--========================== Campo Logradouro ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o Logradouro do Comércio">
-        <span class="label-input100">Logradouro*</span>
-        <input class="input100" type="text" name="logradouro"
-        placeholder="Ex.: Rua fulano de tal, Centro "
-        ng-model="endereco.logradouro" required>
-      </div>
-      <!--========================== Campo Logradouro ==========================-->
+    <!--========================== Campo Nome Completo ==========================-->
+    <div class="form-group col-md-6">
+      <label for="">Nome da Empresa *</label>
+      <input type="text" class="form-control" name="nome"
+        placeholder="Digite aqui o nome da empresa, por favor!"
+        ng-model="empresa.nome" required>
+    </div>
+    <!--========================== Campo Nome Completo ==========================-->
 
-      <!--========================== Campo Número do local do comércio ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o número, por favor!">
-        <span class="label-input100">Número *</span>
-        <input class="input100" type="text" name="numero"
-        placeholder="Ex.: 123, S/N"
-        ng-model="endereco.numero" required>
-      </div>
-      <!--========================== Campo Número do local do comércio ==========================-->
-
-      <!--========================== Campo Complemento ==========================-->
-      <div class="wrap-input100 bg1 rs1-wrap-input100">
-        <span class="label-input100">Complemento </span>
-        <input class="input100" type="text" name="complemento"
-        placeholder="Ex.: Apto. 000"
-        ng-model="endereco.complemento">
-      </div>
-      <!--========================== Campo Complemento ==========================-->
-
-      <!--========================== Campo Cidade ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o nome da cidade, por favor!">
-        <span class="label-input100">Cidade *</span>
-        <input class="input100" type="text" name="cidade"
-        placeholder="Digite qual a sua cidade aqui! "
-        ng-model="endereco.cidade" required>
-      </div>
-      <!--========================== Campo Cidade ==========================-->
-
-      <!--========================== Campo Estado ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Escolha o Estado, por favor!">
-        <span class="label-input100">Estado *</span>
-        <select class="input100" ng-model="endereco.estado" required>
-          <option selected></option>
-          <option value="AC">Acre</option>
-          <option value="AL">Alagoas</option>
-          <option value="AP">Amapá</option>
-          <option value="AM">Amazonas</option>
-          <option value="BA">Bahia</option>
-          <option value="CE">Ceará</option>
-          <option value="DF">Distrito Federal</option>
-          <option value="ES">Espírito Santo</option>
-          <option value="GO">Goiás</option>
-          <option value="MA">Maranhão</option>
-          <option value="MT">Mato Grosso</option>
-          <option value="MS">Mato Grosso do Sul</option>
-          <option value="MG">Minas Gerais</option>
-          <option value="PA">Pará</option>
-          <option value="PB">Paraíba</option>
-          <option value="PR">Paraná</option>
-          <option value="PE">Pernambuco</option>
-          <option value="PI">Piauí</option>
-          <option value="RJ">Rio de Janeiro</option>
-          <option value="RN">Rio Grande do Norte</option>
-          <option value="RS">Rio Grande do Sul</option>
-          <option value="RO">Rondônia</option>
-          <option value="RR">Roraima</option>
-          <option value="SC">Santa Catarina</option>
-          <option value="SP">São Paulo</option>
-          <option value="SE">Sergipe</option>
-          <option value="TO">Tocantins</option>
-        </select>
-      </div>
-      <!--========================== Campo Estado ==========================-->
-
-      <!--========================== Campo CEP ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o CEP, por favor!">
-        <span class="label-input100">CEP *</span>
-        <input class="input100" type="text" name="cep"
-        placeholder="Ex.: 00000-000"
-        ng-model="endereco.cep" required>
-      </div>
-      <!--========================== Campo CEP ==========================-->
-
-      <!--========================== Campo Ponto de Referência ==========================-->
-      <div class="wrap-input100 bg1 rs1-wrap-input100">
-        <span class="label-input100">Ponto de Referência </span>
-        <input class="input100" type="text" name="complemento"
-        placeholder="Ex.: Em frente a Loja X "
-        ng-model="endereco.ponto_referencia">
-      </div>
-      <!--========================== Campo Ponto de Referência ==========================-->
-
-      <!--========================== Campo E-mail ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite um e-mail válido, por favor!">
-        <span class="label-input100">Email *</span>
-        <input class="input100" type="email" name="email"
-        placeholder="Digite o e-mail da loja aqui! "
-        ng-model="empresa.email" required>
-      </div>
-      <!--========================== Campo E-mail ==========================-->
-
-      <!--========================== Campo Celular ==========================-->
-      <div class="wrap-input100 validate-input bg1" data-validate = "Digite o seu número de celular aqui!">
-        <span class="label-input100">Celular (De preferência o Whatsapp) *</span>
-        <input class="input100" type="text" name="telefone"
-        placeholder="Ex.: (83) 9 0000-0000 "
-        ng-model="empresa.telefone" required>
-      </div>
-      <!--========================== Campo Celular ==========================-->
-
-      <!--========================== Campo Instagram ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o link do perfil da loja aqui, por favor!">
-        <span class="label-input100">Instagram *</span>
-        <input class="input100" type="text" name="instagram"
-        placeholder="Digite o link do perfil da loja aqui! "
-        ng-model="empresa.instagram" required>
-      </div>
-      <!--========================== Campo Instagram ==========================-->
-
-      <!--========================== Campo Facebook ==========================-->
-      <div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Digite o link do perfil da loja aqui, por favor!">
-        <span class="label-input100">Facebook *</span>
-        <input class="input100" type="text" name="facebook"
-        placeholder="Digite o link do perfil da loja aqui! "
-        ng-model="empresa.facebook" required>
-      </div>
-      <!--========================== Campo Facebook ==========================-->
-
-      <div class="container-contact100-form-btn">
-        <button class="contact100-form-btn btn-block" ng-click="cadastrar()">
-          <span>
-            Enviar
-            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
-          </span>
-        </button>
-      </div>
-    </form>
+    <!--========================== Campo Natureza do Comércio ==========================-->
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Natureza do Comércio *</label>
+      <input type="text" class="form-control" name="natureza"
+        placeholder="Digite aqui a natureza de comércio da empresa, por favor!"
+        ng-model="empresa.natureza" required>
+    </div>
+    <!--========================== Campo Natureza do Comércio ==========================-->
   </div>
-</div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity">Logradouro *</label>
+      <input type="text" class="form-control" name="logradouro"
+      placeholder="Ex.: Rua fulano de tal, Centro "
+      ng-model="endereco.logradouro" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Número *</label>
+      <input type="text" class="form-control" name="numero"
+      placeholder="Ex.: 123, S/N"
+      ng-model="endereco.numero" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Complemento *</label>
+      <input type="text" class="form-control" name="complemento"
+      placeholder="Ex.: Apto. 000"
+      ng-model="endereco.complemento">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="inputCity">Cidade</label>
+      <input type="text" class="form-control" name="cidade"
+      placeholder="Digite qual a sua cidade aqui! "
+      ng-model="endereco.cidade" require>
+    </div>
+    <div class="form-group col-md-3">
+      <label >Estado</label>
+      <select do" class="form-control" ng-model="endereco.estado" required>
+        <option value="AC">Acre</option>
+        <option value="AL">Alagoas</option>
+        <option value="AP">Amapá</option>
+        <option value="AM">Amazonas</option>
+        <option value="BA">Bahia</option>
+        <option value="CE">Ceará</option>
+        <option value="DF">Distrito Federal</option>
+        <option value="ES">Espírito Santo</option>
+        <option value="GO">Goiás</option>
+        <option value="MA">Maranhão</option>
+        <option value="MT">Mato Grosso</option>
+        <option value="MS">Mato Grosso do Sul</option>
+        <option value="MG">Minas Gerais</option>
+        <option value="PA">Pará</option>
+        <option value="PB">Paraíba</option>
+        <option value="PR">Paraná</option>
+        <option value="PE">Pernambuco</option>
+        <option value="PI">Piauí</option>
+        <option value="RJ">Rio de Janeiro</option>
+        <option value="RN">Rio Grande do Norte</option>
+        <option value="RS">Rio Grande do Sul</option>
+        <option value="RO">Rondônia</option>
+        <option value="RR">Roraima</option>
+        <option value="SC">Santa Catarina</option>
+        <option value="SP">São Paulo</option>
+        <option value="SE">Sergipe</option>
+        <option value="TO">Tocantins</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label>CEP *</label>
+      <input type="text" class="form-control" name="cep"
+      placeholder="Ex.: 00000-000"
+      ng-model="endereco.cep" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Ponto de Referência *</label>
+      <input type="text" class="form-control" name="ponto_referencia"
+      placeholder="Ex.: Em frente a Loja X "
+      ng-model="endereco.ponto_referencia">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="inputCity">E-mail *</label>
+      <input type="email" class="form-control" name="email"
+      placeholder="Digite o e-mail da loja aqui! "
+      ng-model="empresa.email" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Celular (De preferência o Whatsapp) *</label>
+      <input type="text" class="form-control" name="telefone"
+      placeholder="Ex.: (83) 9 0000-0000 "
+      ng-model="empresa.telefone" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Instagram *</label>
+      <input type="text" class="form-control" name="instagram"
+      placeholder="Digite o link do perfil da loja aqui! "
+      ng-model="empresa.instagram" required>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputCity">Facebook *</label>
+      <input type="text" class="form-control" name="facebook"
+      placeholder="Digite o link do perfil da loja aqui! "
+      ng-model="empresa.facebook" required>
+    </div>
+  </div>
+
+  <div class="container-contact100-form-btn">
+    <button class="btn btn-success btn-lg btn-block" ng-click="cadastrar()">
+      <span>
+        Cadastrar
+        <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+</form>

@@ -1,27 +1,49 @@
-<h1>Visitante - Home</h1>
+<section>
+  <!-- Cards de Eventos -->
+  <md-card md-theme-watch ng-repeat="empresa in empresas">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{empresa.nome}}</span>
+        <span class="md-subhead">{{empresa.telefone}}</span>
+        <span class="md-subhead">{{empresa.instagram}}</span>
+        <span class="md-subhead">{{empresa.facebook}}</span>
+      </md-card-title-text>
 
-<!-- Cards de Eventos -->
-<md-card md-theme-watch ng-repeat="empresa in empresas">
-  <md-card-title>
-    <md-card-title-text>
-      <span class="md-headline">{{empresa.nome}}</span>
-      <span class="md-subhead">{{empresa.telefone}}</span>
-      <span class="md-subhead">{{empresa.instagram}}</span>
-      <span class="md-subhead">{{empresa.facebook}}</span>
-    </md-card-title-text>
+      <!-- Mostrar no Mapa -->
+      <md-card-actions layout="row">
+        <md-card-icon-actions>
+          <!--
+                  <md-button aria-label="Cronogramas" ui-sref="visitante.cronogramas({eventoId: evento.id})">
+                      <ng-md-icon icon="list" size="48"></ng-md-icon>
+                      <md-tooltip md-direction="bottom">
+                          Cronogramas
+                      </md-tooltip>
+                  </md-button>
+                -->
+        </md-card-icon-actions>
+      </md-card-actions>
+    </md-card-title>
+  </md-card>
+</section>
 
-    <!-- Mostrar no Mapa -->
-    <md-card-actions layout="row">
-      <md-card-icon-actions>
-        <!--
-                <md-button aria-label="Cronogramas" ui-sref="visitante.cronogramas({eventoId: evento.id})">
-                    <ng-md-icon icon="list" size="48"></ng-md-icon>
-                    <md-tooltip md-direction="bottom">
-                        Cronogramas
-                    </md-tooltip>
-                </md-button>
-              -->
-      </md-card-icon-actions>
-    </md-card-actions>
-  </md-card-title>
-</md-card>
+<section>
+  <h1 align="center">Fale Conosco!</h1>
+
+  <form>
+    <div class="container">
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nome Completo">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="E-mail">
+      </div>
+      <div class="form-group">
+        <label>Telefone</label>
+        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Celular de preferência o Whatsapp.">
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+  </form>
+</section>
