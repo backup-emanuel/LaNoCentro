@@ -1,6 +1,7 @@
 from common.database import db
 from flask_restful import fields
 from sqlalchemy.ext.orderinglist import ordering_list
+from models.cidade import cidade_campos
 
 
 endereco_campos = {
@@ -8,7 +9,7 @@ endereco_campos = {
     'logradouro': fields.String(attribute='logradouro'),
     'numero': fields.String(attribute='numero'),
     'complemento': fields.String(attribute='complemento'),
-    'cidade': fields.String(attribute='cidade'),
+    'cidade': fields.Nested(cidade_campos),
     'estado': fields.String(attribute='estado'),
     'cep': fields.String(attribute='cep'),
     'ponto_referencia': fields.String(attribute='ponto_referencia'),
@@ -25,10 +26,12 @@ class EnderecoModel(db.Model):
     logradouro = db.Column(db.String(255))
     numero = db.Column(db.String(4))
     complemento = db.Column(db.String(45))
-    cidade = db.Column(db.String(45))
     estado = db.Column(db.String(45))
     cep = db.Column(db.String(8))
     ponto_referencia = db.Column(db.String(65))
+
+    fk_id_cidade = db.Column(db.Integer, db.ForeignKey('tb_cidade.id'), nullable=False)
+    cidade = db.relationship('CidadeModel', backref='cidade', primaryjoin="EnderecoModel.fk_id_cidade==CidadeModel.id", uselist=False)
     
     def __init__(self, logradouro, numero, complemento, cidade, estado, cep, ponto_referencia):
         self.logradouro = logradouro

@@ -7,7 +7,8 @@ CREATE TABLE tb_contato(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL,
 	email VARCHAR(255) NOT NULL,
-	telefone VARCHAR(13) NOT NULL
+	telefone VARCHAR(13) NOT NULL,
+	descricao TEXT NULL
 	);
 
 CREATE TABLE tb_endereco(
@@ -15,10 +16,11 @@ CREATE TABLE tb_endereco(
 	logradouro VARCHAR(65) NOT NULL,
 	numero VARCHAR(4) NOT NULL,
 	complemento VARCHAR(45) NULL,
-	cidade VARCHAR(45) NOT NULL,
+	fk_id_cidade INTEGER NOT NULL,
 	estado VARCHAR(45) NOT NULL,
 	cep VARCHAR(8) NOT NULL,
-	ponto_referencia VARCHAR(65) NULL
+	ponto_referencia VARCHAR(65) NULL,
+	FOREIGN KEY(fk_id_cidade) REFERENCES tb_cadade(id)
 	);
 
 CREATE TABLE tb_empresa(

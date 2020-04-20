@@ -5,7 +5,7 @@ from sqlalchemy.ext.orderinglist import ordering_list
 
 cidade_campos = {
     'id': fields.Integer(attribute='id'),
-    'nome': fields.String(attribute='nome'),
+    'nome': fields.String(attribute='nome')
 }
 
 
@@ -22,4 +22,4 @@ class CidadeModel(db.Model):
         self.nome = nome
 
     def __str__(self):
-        return '<Cidade %s>'%(self.cidade)
+        return '<Cidade %s>'%(self.nome)

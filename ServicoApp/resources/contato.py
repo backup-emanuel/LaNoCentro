@@ -7,6 +7,7 @@ parser = reqparse.RequestParser()
 parser.add_argument('nome', required=True)
 parser.add_argument('email', required=True)
 parser.add_argument('telefone', required=True)
+parser.add_argument('descricao', required=False)
 
 
 class ContatosResource(Resource):
@@ -30,8 +31,9 @@ class ContatosResource(Resource):
             nome = args['nome']
             email = args['email']
             telefone = args['telefone']
+            descricao = args['descricao']
 
-            endereco = ContatoModel(nome, email, telefone)
+            endereco = ContatoModel(nome, email, telefone, descricao)
 
             # Criação do Contato.
             db.session.add(endereco)

@@ -1,7 +1,8 @@
-var homeController = function($scope, $mdToast, empresaApi) {
+var homeController = function($scope, $mdToast, empresaApi, contatoApi) {
 
   $scope.empresas = [];
   $scope.selectedEmpresa = [];
+  $scope.contato = {};
 
   $scope.listar = function() {
     empresaApi.listar()
@@ -36,7 +37,16 @@ var homeController = function($scope, $mdToast, empresaApi) {
   }
 
   $scope.enviarContato = function() {
-    console.log("enviando contato.");
+    // Criar uma cópia do contato do $scope.
+    let contato = angular.copy($scope.contato);
+
+    contatoApi.cadastrar(contato)
+      .then(function(response) {
+        console.log("Cadastrou");
+      })
+      .catch(function(error) {
+        console.log("Problema");
+      });
   }
 
   $scope.listar();

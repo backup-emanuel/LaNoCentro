@@ -2,12 +2,13 @@ from flask_restful import Resource, marshal_with, reqparse, current_app, abort, 
 from common.database import db
 from sqlalchemy import exc
 from models.endereco import EnderecoModel, endereco_campos
+from models.cidade import CidadeModel, cidade_campos
 
 parser = reqparse.RequestParser()
 parser.add_argument('logradouro', required=True)
 parser.add_argument('numero', required=True)
 parser.add_argument('complemento', required=False)
-parser.add_argument('cidade', required=True)
+parser.add_argument('cidade', type=dict)
 parser.add_argument('estado', required=True)
 parser.add_argument('cep', required=True)
 parser.add_argument('ponto_referencia', required=False)
@@ -35,10 +36,13 @@ class EnderecosResource(Resource):
             logradouro = args['logradouro']
             numero = args['numero']
             complemento = args['complemento']
-            cidade = args['cidade']
+            cidade_id = args['cidade']['id']
             estado = args['estado']
             cep = args['cep']
             ponto_referencia = args['ponto_referencia']
+
+            # Recovering existing resources
+            cidade = CidadeModel.query.filter_by(id=cidade_id).first()
 
             endereco = EnderecoModel(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
 

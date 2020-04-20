@@ -1,22 +1,22 @@
 // Empresas - Factory
-var empresaFactory = function($http, serviceCfg) {
+var contatoFactory = function($http, serviceCfg) {
 
   var baseUrl = serviceCfg.baseUrl();
 
   var _cadastrar = function(empresa) {
-    return $http.post(baseUrl + "/empresas", empresa);
+    return $http.post(baseUrl + "/contatos", empresa);
   };
 
   var _listar = function() {
-    return $http.get(baseUrl + "/empresas");
+    return $http.get(baseUrl + "/contatos");
   };
 
   var _pesquisarPorId = function(id) {
-    return $http.get(baseUrl + "/empresas/" + encodeURI(id));
+    return $http.get(baseUrl + "/contatos/" + encodeURI(id));
   };
 
   var _buscarPorNome = function(nome) {
-    return $http.get(baseUrl + "/empresas/nome/" + encodeURI(nome));
+    return $http.get(baseUrl + "/contatos/nome/" + encodeURI(nome));
   }
 
   return {
@@ -27,4 +27,4 @@ var empresaFactory = function($http, serviceCfg) {
   };
 }
 
-app.factory("empresaApi", empresaFactory);
+app.factory("contatoApi", contatoFactory);

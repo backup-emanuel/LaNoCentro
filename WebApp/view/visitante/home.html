@@ -32,7 +32,7 @@
         <section id="gallery">
 
             <!-- Heading -->
-            <h2 class="mb-5 font-weight-bold text-center">Lista de Comerciantes</h2>
+            <h2 class="mb-5 font-weight-bold text-center">Empresas</h2>
 
             <!--Grid row-->
             <md-card>
@@ -44,9 +44,9 @@
                   </md-card-avatar>
 
                   <md-card-header-text>
-                    <span class="md-title">Empresa</span>
+                    <span class="md-title">Empresas</span>
                     <span class="md-subhead">
-                      Digite a Empresa no campo abaixo para buscar.
+                      Digite o nome da Empresa no campo abaixo para buscar.
                     </span>
                   </md-card-header-text>
 
@@ -62,7 +62,8 @@
                     <ng-md-icon icon="search" size="32"></ng-md-icon>
 
                     <div class="toolbar-input" flex>
-                      <input type="text" ng-model="nome" ng-keyup="pesquisar(nome)" placeholder="Empresa">
+                      <input type="text" ng-model="nome"
+                        ng-keyup="pesquisar(nome)" placeholder="Busque uma Empresa">
                     </div>
 
                     <md-button aria-label="Limpar Busca" ng-click="limparBusca()">
@@ -73,32 +74,34 @@
                 </md-toolbar>
 
                 <!-- Tabela -->
-                <table md-table md-row-select ng-model="selectedCras">
-                  <thead md-head>
-                    <tr md-row>
-                      <th md-column>Nome</th>
-                      <th md-column>Natureza</th>
-                      <th md-column>Telefone</th>
-                      <th md-column>E-mail</th>
-                      <th md-column>Facebook</th>
-                      <th md-column>Instagran</th>
-                    </tr>
-                  </thead>
+                <table md-table md-row-select ng-model="selectedEmpresa">
+                    <thead md-head>
+                        <tr md-row>
+                          <th md-column>Nome</th>
+                          <th md-column>Natureza</th>
+                          <th md-column>Município</th>
+                          <th md-column>UF</th>
+                          <th md-column>E-mail</th>
+                          <th md-column>Instagran</th>
+                          <th md-column>Facebook</th>
+                        </tr>
+                    </thead>
 
-                  <tbody md-body>
-                    <tr ng-repeat="empresa in empresas">
-                      <td md-cell>{{empresa.nome | uppercase}}</td>
-                      <td md-cell>{{empresa.natureza | uppercase}}</td>
-                      <td md-cell>{{empresa.telefone | uppercase}}</td>
-                      <td md-cell>{{empresa.email | uppercase}}</td>
-                      <td md-cell>{{empresa.facebook | uppercase}}</td>
-                      <td md-cell>{{empresa.instagran | uppercase}}</td>
-                    </tr>
-                  </tbody>
+                    <tbody md-body>
+                        <tr md-row md-select="empresa" md-on-select="detalharEmpresa" md-select-id="empresa.id" md-auto-select ng-repeat="empresa in empresas">
+                          <td md-cell>{{empresa.nome | uppercase}}</td>
+                          <td md-cell>{{empresa.natureza | uppercase}}</td>
+                          <td md-cell>{{empresa.endereco.cidade.nome | uppercase}}</td>
+                          <td md-cell>{{empresa.endereco.estado | uppercase}}</td>
+                          <td md-cell>{{empresa.email | uppercase}}</td>
+                          <td md-cell>{{empresa.instagram | uppercase}}</td>
+                          <td md-cell>{{empresa.facebook | uppercase}}</td>
+                        </tr>
+                    </tbody>
                 </table>
-              </md-table-container>
-              <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{empregos.length}}" md-page-select></md-table-pagination>
-            </md-card>
+            </md-table-container>
+            <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{empresas.length}}" md-page-select></md-table-pagination>
+        </md-card>
             <!--Grid row-->
 
         </section>
@@ -106,7 +109,7 @@
 
         <hr class="my-5">
 
-        <!--Section: Contact-->
+        <!--Section: Contato-->
         <section id="contact">
           <!-- Contato -->
           <md-card>
@@ -145,7 +148,7 @@
                 <!-- Telefone -->
                 <md-input-container class="md-icon-float md-block">
                   <label>Telefone (Whatsapp)</label>
-                  <input ng-model="contato.telefone" name="telefone" type="text" ng-pattern="/^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$/"
+                  <input ng-model="contato.telefone" name="telefone" type="text" 
                     required>
                   <div ng-messages="enviarContatoForm.telefone.$error" role="alert">
                     <div ng-messages-include="messages.html"></div>
@@ -160,11 +163,22 @@
                     <div ng-messages-include="messages.html"></div>
                   </div>
                 </md-input-container>
+
+                <!-- Descrição -->
+                <md-input-container class="md-icon-float md-block">
+                  <label>Descrição</label>
+                  <textarea ng-model="contato.descricao" name="descricao"
+                    rows="8" cols="80">
+                  </textarea>
+                  <div ng-messages="enviarContatoForm.descricao.$error" role="alert">
+                    <div ng-messages-include="messages.html"></div>
+                  </div>
+                </md-input-container>
               </form>
             </md-card-content>
           </md-card>
         </section>
-        <!--Section: Contact-->
+        <!--Section: Contacto-->
 
         <hr class="my-5">
 
@@ -178,7 +192,7 @@
             <div class="row">
 
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
 
                     <div class="view overlay z-depth-1-half">
                         <img src="https://mdbootstrap.com/img/Photos/Others/images/10.jpg" class="img-fluid" alt="">
@@ -195,7 +209,7 @@
                 <!--Grid column-->
 
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
 
                     <div class="view overlay z-depth-1-half">
                         <img src="https://mdbootstrap.com/img/Photos/Others/images/11.jpg" class="img-fluid" alt="">
@@ -215,7 +229,7 @@
             <!--Grid row-->
 
         </section>
-        <!--Section: Examples-->
+        <!--Section: Parcerias-->
 
     </div>
 </main>
