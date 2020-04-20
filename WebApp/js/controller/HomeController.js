@@ -1,6 +1,7 @@
 var homeController = function($scope, $mdToast, empresaApi) {
 
   $scope.empresas = [];
+  $scope.selectedEmpresa = [];
 
   $scope.listar = function() {
     empresaApi.listar()
@@ -28,6 +29,11 @@ var homeController = function($scope, $mdToast, empresaApi) {
         });
     }
   };
+
+  $scope.detalharEmpresa = function (empresa) {
+      console.log("Detalhar Empresa");
+      console.log(empresa);
+  }
 
   $scope.enviarContato = function() {
     console.log("enviando contato.");

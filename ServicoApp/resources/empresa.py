@@ -54,3 +54,11 @@ class EmpresasResource(Resource):
             return 404
 
         return marshal(empresa, empresa_campos), 201
+
+class EmpresaNomeResource(Resource):
+    # GET /empresas/nome/<nome>
+    @marshal_with(empresa_campos)
+    def get(self, nome):
+        current_app.logger.info("Get - Empresas por nome")
+        predios = EmpresaModel.query.filter(EmpresaModel.nome.ilike('%' + nome + '%')).all()
+        return predios, 200
