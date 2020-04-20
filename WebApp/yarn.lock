@@ -91,6 +91,18 @@ debug@^2.2.0:
   dependencies:
     ms "2.0.0"
 
+jquery-minicolors@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/jquery-minicolors/-/jquery-minicolors-2.1.10.tgz#b29eea541d9a32b4e26923168fb2c16271867379"
+  integrity sha1-sp7qVB2aMrTiaSMWj7LBYnGGc3k=
+  dependencies:
+    jquery ">= 1.7.x"
+
+"jquery@>= 1.7.x":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
+
 jquery@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
@@ -106,6 +118,11 @@ leaflet@^1.6.0:
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.6.0.tgz#aecbb044b949ec29469eeb31c77a88e2f448f308"
   integrity sha512-CPkhyqWUKZKFJ6K8umN5/D2wrJ2+/8UIpXppY7QDnUZW5bZL5+SEI2J7GBpwh4LIupOKqbNSQXgqmrEJopHVNQ==
 
+mdbootstrap@^4.16.0:
+  version "4.16.0"
+  resolved "https://registry.yarnpkg.com/mdbootstrap/-/mdbootstrap-4.16.0.tgz#2a28712430f06c15d675ef1b8566e93ca53562c4"
+  integrity sha512-HtCfcu6bGxJ3UOofuasaKGHfMKSX0D6+I23QAOmyiFjfdwzJEYW13yRvx2Jzc9aSkc+YXwlp8jTl3PQfcSYtGg==
+
 moment@^2.24.0:
   version "2.24.0"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
@@ -115,6 +132,11 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=
+
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
 
 ui-leaflet@^1.0.3:
   version "1.0.3"
