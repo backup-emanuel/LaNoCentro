@@ -1,6 +1,7 @@
 var empresasController = function($scope, $mdToast, empresaApi) {
 
   $scope.empresas = [];
+  $scope.selectedEmpresa = [];
 
   $scope.listar = function() {
     empresaApi.listar()
@@ -28,6 +29,16 @@ var empresasController = function($scope, $mdToast, empresaApi) {
         });
     }
   };
+
+  $scope.detalharEmpresa = function (empresa) {
+      console.log("Detalhar Empresa");
+      console.log(empresa);
+  }
+
+  let limparBusca = function () {
+        $scope.nome = "";
+        $scope.empresas = [];
+    };
 
   $scope.listar();
 }

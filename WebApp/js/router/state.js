@@ -26,6 +26,8 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
       // Subrota - Administrador
       .state('administrador', {
         abstract: true,
+        controller: 'sideNavCtrl',
+        controllerAs: 'sideNav',
         data: {
           label: 'Administrador'
         },
@@ -33,6 +35,11 @@ app.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         templateUrl: 'view/administrador/administrador.html'
       })
       // Empresa
+      .state('administrador.home', {
+        url: '/home',
+        title: 'Administrador',
+        templateUrl: 'view/administrador/home.html'
+      })
       .state('administrador.empresa', {
         url: '/empresa',
         title: 'Cadastrar Empresa',

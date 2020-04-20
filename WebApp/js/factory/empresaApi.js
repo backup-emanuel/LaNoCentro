@@ -4,7 +4,7 @@ var empresaFactory = function($http, serviceCfg) {
   var baseUrl = serviceCfg.baseUrl();
 
   var _cadastrar = function(empresa) {
-    return $http.post(baseUrl + "lanocentro/api/empresas", empresa);
+    return $http.post(baseUrl + "/empresas", empresa);
   };
 
   var _listar = function() {
@@ -15,10 +15,15 @@ var empresaFactory = function($http, serviceCfg) {
     return $http.get(baseUrl + "/empresas/" + encodeURI(id));
   };
 
+  var _buscarPorNome = function(nome) {
+    return $http.get(_path + "/nome/" + encodeURI(nome));
+  }
+
   return {
     cadastrar: _cadastrar,
     listar: _listar,
-    pesquisarPorId: _pesquisarPorId
+    pesquisarPorId: _pesquisarPorId,
+    buscarPorNome: _buscarPorNome
   };
 }
 
