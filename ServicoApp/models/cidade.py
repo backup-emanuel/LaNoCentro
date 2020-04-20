@@ -18,8 +18,8 @@ class CidadeModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(255))
 
-    def __init__(self, nome):
-        self.nome = nome
+    def __init__(self, cidade):
+        self.cidade = cidade
 
     def __str__(self):
         return '<Cidade %s>'%(self.cidade)
