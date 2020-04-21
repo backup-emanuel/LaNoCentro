@@ -14,6 +14,11 @@ app.factory("menu", function($location, $rootScope) {
           name: 'Empresas',
           state: 'administrador.empresas',
           type: 'link'
+        },
+        {
+          name: 'Contatos',
+          state: 'administrador.contatos',
+          type: 'link'
         }
       ]
     };
