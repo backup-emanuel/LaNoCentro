@@ -4,7 +4,7 @@
             <!-- Cabeçalho de opções -->
             <md-card-header>
                 <md-card-avatar>
-                    <ng-md-icon icon="school" size="42"></ng-md-icon>
+                    <ng-md-icon icon="shopping_cart" size="42"></ng-md-icon>
                 </md-card-avatar>
 
                 <md-card-header-text>
@@ -16,8 +16,15 @@
 
                 <md-card-actions layout="row">
                     <md-card-icon-actions>
+                        <md-button aria-label="Adicionar Empresa" ui-sref="administrador.empresa">
+                            <ng-md-icon icon="add" size="42"></ng-md-icon>
+                            <md-tooltip md-direction="bottom">
+                                Adicionar Empresa
+                            </md-tooltip>
+                        </md-button>
                     </md-card-icon-actions>
                 </md-card-actions>
+
             </md-card-header>
 
             <md-toolbar class="md-table-toolbar md-default">
