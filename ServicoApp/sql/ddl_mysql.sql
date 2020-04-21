@@ -20,7 +20,7 @@ CREATE TABLE tb_endereco(
 	estado VARCHAR(45) NOT NULL,
 	cep VARCHAR(8) NOT NULL,
 	ponto_referencia VARCHAR(65) NULL,
-	FOREIGN KEY(fk_id_cidade) REFERENCES tb_cadade(id)
+	FOREIGN KEY(fk_id_cidade) REFERENCES tb_cidade(id)
 	);
 
 CREATE TABLE tb_empresa(
