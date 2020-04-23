@@ -7,6 +7,7 @@ from resources.endereco import *
 from resources.contato import *
 from resources.empresa import *
 from resources.cidade import *
+from resources.estado import *
 
 app = Flask(__name__)
 
@@ -40,6 +41,9 @@ api.add_resource(EmpresaNomeResource, '/empresas/nome/<nome>')
 
 api.add_resource(CidadesResource, '/cidades')
 api.add_resource(CidadeResource, '/cidades/<cidade_id>')
+
+api.add_resource(EstadosResource, '/estados')
+api.add_resource(EstadoResource, '/estados/<cidade_id>')
 
 # Blueprints para Restful.
 app.register_blueprint(api_bp)

@@ -1,3 +1,8 @@
+CREATE TABLE tb_estado(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(255) NOT NULL
+	);
+
 CREATE TABLE tb_cidade(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL
@@ -17,10 +22,16 @@ CREATE TABLE tb_endereco(
 	numero VARCHAR(4) NOT NULL,
 	complemento VARCHAR(45) NULL,
 	fk_id_cidade INTEGER NOT NULL,
-	estado VARCHAR(45) NOT NULL,
+	fk_id_estado INTEGER NOT NULL,
 	cep VARCHAR(8) NOT NULL,
 	ponto_referencia VARCHAR(65) NULL,
-	FOREIGN KEY(fk_id_cidade) REFERENCES tb_cidade(id)
+	FOREIGN KEY(fk_id_cidade) REFERENCES tb_cidade(id),
+	FOREIGN KEY(fk_id_estado) REFERENCES tb_estado(id)
+	);
+
+CREATE TABLE tb_natureza(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	tipo VARCHAR(255) NOT NULL
 	);
 
 CREATE TABLE tb_empresa(

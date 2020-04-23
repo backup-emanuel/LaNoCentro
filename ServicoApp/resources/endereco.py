@@ -3,13 +3,14 @@ from common.database import db
 from sqlalchemy import exc
 from models.endereco import EnderecoModel, endereco_campos
 from models.cidade import CidadeModel, cidade_campos
+from models.estado import EstadoModel, estado_campos
 
 parser = reqparse.RequestParser()
 parser.add_argument('logradouro', required=True)
 parser.add_argument('numero', required=True)
 parser.add_argument('complemento', required=False)
-parser.add_argument('cidade', type=dict)
-parser.add_argument('estado', required=True)
+parser.add_argument('cidade', type=dict, required=False)
+parser.add_argument('estado', type=dict, required=False)
 parser.add_argument('cep', required=True)
 parser.add_argument('ponto_referencia', required=False)
 
@@ -37,13 +38,13 @@ class EnderecosResource(Resource):
             numero = args['numero']
             complemento = args['complemento']
             cidade_id = args['cidade']['id']
-            estado = args['estado']
+            estado_id = args['estado']['id']
             cep = args['cep']
             ponto_referencia = args['ponto_referencia']
 
             # Recovering existing resources
             cidade = CidadeModel.query.filter_by(id=cidade_id).first()
-
+            estado = EstadoModel.query.filter_by(id=estado_id).first()
             endereco = EnderecoModel(logradouro, numero, complemento, cidade, estado, cep, ponto_referencia)
 
             # Criação do Endereço.
@@ -80,8 +81,8 @@ class EnderecoResource(Resource):
             logradouro = args['logradouro']
             numero = args['numero']
             complemento = args['complemento']
-            cidade = args['cidade']
-            estado = args['estado']
+            cidade = args['cidade'] #TODO: atualizar
+            estado = args['estado'] #TODO: atualizar
             cep = args['cep']
             ponto_referencia = args['ponto_referencia']
 
