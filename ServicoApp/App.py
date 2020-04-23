@@ -8,6 +8,7 @@ from resources.contato import *
 from resources.empresa import *
 from resources.cidade import *
 from resources.estado import *
+from resources.natureza import *
 
 app = Flask(__name__)
 
@@ -43,7 +44,10 @@ api.add_resource(CidadesResource, '/cidades')
 api.add_resource(CidadeResource, '/cidades/<cidade_id>')
 
 api.add_resource(EstadosResource, '/estados')
-api.add_resource(EstadoResource, '/estados/<cidade_id>')
+api.add_resource(EstadoResource, '/estados/<estado_id>')
+
+api.add_resource(NaturezasResource, '/naturezas')
+api.add_resource(NaturezaResource, '/naturezas/<natureza_id>')
 
 # Blueprints para Restful.
 app.register_blueprint(api_bp)

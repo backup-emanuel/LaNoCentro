@@ -3,10 +3,11 @@ from common.database import db
 from sqlalchemy import exc
 from models.empresa import EmpresaModel, empresa_campos
 from models.endereco import EnderecoModel
+from models.natureza import NaturezaModel
 
 parser = reqparse.RequestParser()
 parser.add_argument('nome', required=True)
-parser.add_argument('natureza', required=True)
+parser.add_argument('natureza', type=dict)
 parser.add_argument('endereco', type=dict)
 parser.add_argument('email', required=True)
 parser.add_argument('telefone', required=True)
@@ -33,7 +34,7 @@ class EmpresasResource(Resource):
 
             # args
             nome = args['nome']
-            natureza = args['natureza']            
+            natureza_id = args['natureza']['id']          
             endereco_id = args['endereco']['id']
             email = args['email']
             telefone = args['telefone']
@@ -42,6 +43,7 @@ class EmpresasResource(Resource):
 
             # Recovering existing resources
             endereco = EnderecoModel.query.filter_by(id=endereco_id).first()
+            natureza = NaturezaModel.query.filter_by(id=natureza_id).first()
 
             empresa = EmpresaModel(nome, natureza, endereco, email, telefone, instagram, facebook)
 

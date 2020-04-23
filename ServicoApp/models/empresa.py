@@ -2,12 +2,13 @@ from common.database import db
 from flask_restful import fields
 from sqlalchemy.ext.orderinglist import ordering_list
 from resources.endereco import EnderecoModel, endereco_campos
+from resources.natureza import NaturezaModel, natureza_campos
 
 
 empresa_campos = {
     'id': fields.Integer(attribute='id'),
     'nome': fields.String(attribute='nome'),
-    'natureza': fields.String(attribute='natureza'),
+    'natureza': fields.Nested(natureza_campos),
     'endereco': fields.Nested(endereco_campos),
     'email': fields.String(attribute='email'),
     'telefone': fields.String(attribute='telefone'),
@@ -24,7 +25,6 @@ class EmpresaModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(255), nullable=False)
-    natureza = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False)
     telefone = db.Column(db.String(13), nullable=False)
     instagram = db.Column(db.String(255), nullable=True)
@@ -33,6 +33,10 @@ class EmpresaModel(db.Model):
     fk_id_endereco = db.Column(db.Integer, db.ForeignKey('tb_endereco.id'),
         nullable=False)
     endereco = db.relationship('EnderecoModel', backref='endereco', primaryjoin="EmpresaModel.fk_id_endereco==EnderecoModel.id", uselist=False)
+
+    fk_id_natureza = db.Column(db.Integer, db.ForeignKey('tb_natureza.id'), nullable=False)
+    natureza = db.relationship('NaturezaModel', backref='natureza', primaryjoin="EmpresaModel.fk_id_natureza==NaturezaModel.id", uselist=False)
+
     
     def __init__(self, nome, natureza, endereco, email, telefone, instagram, facebook):
         self.nome = nome
