@@ -60,9 +60,9 @@
                     <tr md-row md-select="empresa" md-on-select="detalharEmpresa" md-select-id="empresa.id" md-auto-select ng-repeat="empresa in empresas">
                       <td md-cell>{{empresa.id}}</td>
                       <td md-cell>{{empresa.nome | uppercase}}</td>
-                      <td md-cell>{{empresa.natureza | uppercase}}</td>
-                      <td md-cell>{{empresa.endereco.municipio | uppercase}}</td>
-                      <td md-cell>{{empresa.endereco.uf | uppercase}}</td>
+                      <td md-cell>{{empresa.natureza.tipo | uppercase}}</td>
+                      <td md-cell>{{empresa.endereco.cidade.nome | uppercase}}</td>
+                      <td md-cell>{{empresa.endereco.estado.nome | uppercase}}</td>
                       <td md-cell>{{empresa.email | uppercase}}</td>
                     </tr>
                 </tbody>

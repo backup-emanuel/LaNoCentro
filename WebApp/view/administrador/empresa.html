@@ -59,7 +59,7 @@
             <label>Natureza</label>
             <md-select ng-model="empresa.natureza.id" name="natureza" aria-label="Selecione a Natureza da Empresa">
               <md-option ng-repeat="natureza in naturezas" value="{{natureza.id}}">
-                {{natureza.nome}}
+                {{natureza.tipo}}
               </md-option>
             </md-select>
             <div ng-messages="cadastrarEmpresaForm.empresa.$error">

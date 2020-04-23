@@ -1,10 +1,10 @@
 // Empresas - Factory
-var enderecoFactory = function($http) {
+var enderecoFactory = function($http, serviceCfg) {
 
-  var baseUrl = "http://127.0.0.1:5000";
+  var baseUrl = serviceCfg.baseUrl();
 
   var _cadastrar = function(endereco) {
-    return $http.post(baseUrl + "lanocentro/api/endereco", endereco);
+    return $http.post(baseUrl + "/enderecos", endereco);
   };
 
   var _listar = function() {
