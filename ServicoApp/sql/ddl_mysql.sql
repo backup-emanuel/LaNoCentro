@@ -82,6 +82,9 @@ CREATE TABLE `tb_empresa` (
   `telefone` varchar(13) NOT NULL,
   `instagram` varchar(255) DEFAULT NULL,
   `facebook` varchar(255) DEFAULT NULL,
+  `is_delivery` BOOLEAN DEFAULT 0,
+  `is_deleted` BOOLEAN DEFAULT 0,
+  `dt_insercao` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_id_endereco` (`fk_id_endereco`),
   KEY `fk_id_natureza` (`fk_id_natureza`),
@@ -95,10 +98,18 @@ CREATE TABLE `tb_empresa` (
 --
 
 LOCK TABLES `tb_empresa` WRITE;
+INSERT INTO `lanocentro`.`tb_empresa` 
+  (`nome`, `fk_id_natureza`, `fk_id_endereco`, `email`, `telefone`, `instagram`, `facebook`, `is_delivery`, `is_deleted`) 
+  VALUES  ('Quintanda da Verinha',1,1,'emp3@a.com','5583','emp3','emp3', '1','0'),
+          ('Calças da moda',2,1,'emp4@a.com','5583','emp4','emp4', '1','0');
 /*!40000 ALTER TABLE `tb_empresa` DISABLE KEYS */;
-INSERT INTO `tb_empresa` VALUES (1,'Quintanda da Verinha',1,1,'emp3@a.com','5583','emp3','emp3'),(2,'Calças da moda',2,1,'emp4@a.com','5583','emp4','emp4');
 /*!40000 ALTER TABLE `tb_empresa` ENABLE KEYS */;
 UNLOCK TABLES;
+
+INSERT INTO `lanocentro`.`tb_empresa` 
+  (`nome`, `fk_id_natureza`, `fk_id_endereco`, `email`, `telefone`, `instagram`, `facebook`, `is_delivery`, `is_deleted`, `dt_insercao`) 
+  VALUES (1,'Quintanda da Verinha',1,1,'emp3@a.com','5583','emp3','emp3', '1','0'),
+        (2,'Calças da moda',2,1,'emp4@a.com','5583','emp4','emp4', '1','0');
 
 --
 -- Table structure for table `tb_empresa_produto`

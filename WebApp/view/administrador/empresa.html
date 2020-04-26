@@ -66,6 +66,13 @@
               <div ng-messages-include="messages.html"></div>
             </div>
           </md-input-container>
+
+          <!-- Delivery -->
+          <md-input-container class="md-block">
+              <md-checkbox ng-model="empresa.isDelivery" aria-label="Faz entrega?">
+                  A empresa realiza entrega de produtos por Delivery: <b>{{empresa.isDelivery| yesNo}}</b>.
+              </md-checkbox>
+          </md-input-container>
         </fieldset>
 
         <fieldset>

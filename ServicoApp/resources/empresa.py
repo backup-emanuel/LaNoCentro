@@ -6,13 +6,14 @@ from models.endereco import EnderecoModel
 from models.natureza import NaturezaModel
 
 parser = reqparse.RequestParser()
-parser.add_argument('nome', required=True)
-parser.add_argument('natureza', type=dict)
-parser.add_argument('endereco', type=dict)
-parser.add_argument('email', required=True)
-parser.add_argument('telefone', required=True)
-parser.add_argument('instagram', required=False)
-parser.add_argument('facebook', required=False)
+parser.add_argument('nome', required=True, help="Especifique um nome válido para a Empresa.")
+parser.add_argument('natureza', type=dict, help="Especifique uma natureza válida para a Empresa.")
+parser.add_argument('endereco', type=dict, help="Especifique um endereço válido para a Empresa.")
+parser.add_argument('email', required=True, help="Especifique um e-mail válido para a Empresa.")
+parser.add_argument('telefone', required=True, help="Especifique um telefone válido para a Empresa.")
+parser.add_argument('instagram', required=False, help="Especifique um instagram válido para a Empresa.")
+parser.add_argument('facebook', required=False, help="Especifique um facebook válido para a Empresa.")
+parser.add_argument('isDelivery', required=True, help="Especifique um Delivery válido para a Empresa.")
 
 
 class EmpresasResource(Resource):
@@ -39,13 +40,14 @@ class EmpresasResource(Resource):
             email = args['email']
             telefone = args['telefone']
             instagram = args['instagram']
-            facebook = args['facebook']            
+            facebook = args['facebook']
+            is_delivery = args['isDelivery']         
 
             # Recovering existing resources
             endereco = EnderecoModel.query.filter_by(id=endereco_id).first()
             natureza = NaturezaModel.query.filter_by(id=natureza_id).first()
 
-            empresa = EmpresaModel(nome, natureza, endereco, email, telefone, instagram, facebook)
+            empresa = EmpresaModel(nome, natureza, endereco, email, telefone, instagram, facebook, is_delivery)
 
             # Criação da Empresa.
             db.session.add(empresa)
@@ -56,6 +58,66 @@ class EmpresasResource(Resource):
             return 404
 
         return marshal(empresa, empresa_campos), 201
+# GET /cronogramas/<id>
+class EmpresaResource(Resource):
+    @marshal_with(empresa_campos)
+    def get(self, empresa_id):
+        empresa = EmpresaModel.query.filter_by(id=empresa_id).first()
+        if empresa is None:
+            abort(404, message='Empresa {} nao existe'.format(empresa_id))
+        return empresa, 200
+
+    def put(self, empresa_id):
+        current_app.logger.info("Put - Empresa")
+        try:
+            # Parser JSON
+            args = parser.parse_args()
+            current_app.logger.info("Empresa: %s:" % args)
+            # Empresa
+            nome = args['nome']
+            natureza_id = args['natureza']['id']          
+            endereco_id = args['endereco']['id']
+            email = args['email']
+            telefone = args['telefone']
+            instagram = args['instagram']
+            facebook = args['facebook']
+
+            # Recovering existing resources
+            endereco = EnderecoModel.query.filter_by(id=endereco_id).first()
+            natureza = NaturezaModel.query.filter_by(id=natureza_id).first()
+
+            EmpresaModel.query \
+                .filter_by(id=empresa_id) \
+                .update(dict(nome=nome, 
+                            fk_id_natureza=natureza_id, 
+                            fk_id_endereco=endereco_id, 
+                            email=email, 
+                            telefone=telefone, 
+                            instagram=instagram, 
+                            facebook=facebook))
+
+                
+            db.session.commit()
+
+        except exc.SQLAlchemyError:
+            current_app.logger.error("Exceção")
+
+        return 204
+
+    def delete(self, empresa_id):
+        current_app.logger.info("Delete - Empresa: %s:" % empresa_id)
+        try:
+            EmpresaModel.query\
+                .filter_by(id=empresa_id)\
+                .update(dict(is_deleted=True))
+            db.session.commit()
+
+        except exc.SQLAlchemyError:
+            current_app.logger.error("Exceção")
+            return 404
+
+        return 204
+
 
 class EmpresaNomeResource(Resource):
     # GET /empresas/nome/<nome>

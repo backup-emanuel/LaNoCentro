@@ -4,7 +4,7 @@
 app.factory("toastUtil", function ($mdToast) {
     return {
 
-        showErrorToast: function (error) {
+        showErrorToast: function (error={}) {
 
             let mensagem = "Ocorreu um problema do NutrIF no Servidor, favor chamar o suporte.";
             let codigo = 0;
@@ -47,6 +47,16 @@ app.factory("toastUtil", function ($mdToast) {
             );
 
             return true;
+        },
+        showErrosValidation: function(errors) {
+          for (mensagem of errors) {
+            var toast = $mdToast.simple()
+              .textContent(mensagem)
+              .position('top right')
+              .action('OK')
+              .hideDelay(6000);
+            $mdToast.show(toast);
+          }
         }
     }
 });

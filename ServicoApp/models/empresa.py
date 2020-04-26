@@ -3,6 +3,7 @@ from flask_restful import fields
 from sqlalchemy.ext.orderinglist import ordering_list
 from resources.endereco import EnderecoModel, endereco_campos
 from resources.natureza import NaturezaModel, natureza_campos
+from sqlalchemy.sql import func
 
 
 empresa_campos = {
@@ -13,7 +14,9 @@ empresa_campos = {
     'email': fields.String(attribute='email'),
     'telefone': fields.String(attribute='telefone'),
     'instagram': fields.String(attribute='instagram'),
-    'facebook': fields.String(attribute='facebook')
+    'facebook': fields.String(attribute='facebook'),
+    'isDelivery': fields.Boolean(attribute='is_delivery'),
+    'isDeleted': fields.Boolean(attribute='is_deleted')
 }
 
 
@@ -29,6 +32,9 @@ class EmpresaModel(db.Model):
     telefone = db.Column(db.String(13), nullable=False)
     instagram = db.Column(db.String(255), nullable=True)
     facebook = db.Column(db.String(255), nullable=True)
+    is_delivery = db.Column(db.Boolean, default=False)
+    is_deleted = db.Column(db.Boolean, default=False)
+    dt_insercao = db.Column(db.DateTime, default=func.current_timestamp())
 
     fk_id_endereco = db.Column(db.Integer, db.ForeignKey('tb_endereco.id'),
         nullable=False)
@@ -38,7 +44,7 @@ class EmpresaModel(db.Model):
     natureza = db.relationship('NaturezaModel', backref='natureza', primaryjoin="EmpresaModel.fk_id_natureza==NaturezaModel.id", uselist=False)
 
     
-    def __init__(self, nome, natureza, endereco, email, telefone, instagram, facebook):
+    def __init__(self, nome, natureza, endereco, email, telefone, instagram, facebook, is_delivery):
         self.nome = nome
         self.natureza = natureza
         self.endereco = endereco
@@ -46,6 +52,7 @@ class EmpresaModel(db.Model):
         self.telefone = telefone
         self.instagram = instagram
         self.facebook = facebook
+        self.is_delivery = is_delivery
 
     def __str__(self):
         return '<Empresa %r>'%(self.nome)
