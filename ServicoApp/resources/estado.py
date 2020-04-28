@@ -4,7 +4,7 @@ from sqlalchemy import exc
 from models.estado import EstadoModel, estado_campos
 
 parser = reqparse.RequestParser()
-parser.add_argument('nome', required=True)
+parser.add_argument('nome', required=True, help="Especifique um nome válido para o Estado.")
 
 class EstadosResource(Resource):
     # GET /estados

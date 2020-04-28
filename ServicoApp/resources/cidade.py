@@ -4,7 +4,8 @@ from sqlalchemy import exc
 from models.cidade import CidadeModel, cidade_campos
 
 parser = reqparse.RequestParser()
-parser.add_argument('nome', required=True)
+parser.add_argument('nome', required=True, help="Especifique um nome válido para a Cidade.")
+
 
 class CidadesResource(Resource):
     # GET /cidades

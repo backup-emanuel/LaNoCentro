@@ -4,10 +4,10 @@ from sqlalchemy import exc
 from models.contato import ContatoModel, contato_campos
 
 parser = reqparse.RequestParser()
-parser.add_argument('nome', required=True)
-parser.add_argument('email', required=True)
-parser.add_argument('telefone', required=True)
-parser.add_argument('descricao', required=False)
+parser.add_argument('nome', required=True, help="Especifique um nome válido para o Contato.")
+parser.add_argument('email', required=True, help="Especifique um email válido para o Contato.")
+parser.add_argument('telefone', required=True, help="Especifique um telefone válido para o Contato.")
+parser.add_argument('descricao', required=False, help="Especifique uma descrição válida para o Contato.")
 
 
 class ContatosResource(Resource):

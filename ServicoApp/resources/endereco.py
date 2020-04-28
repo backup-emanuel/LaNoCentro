@@ -6,13 +6,13 @@ from models.cidade import CidadeModel, cidade_campos
 from models.estado import EstadoModel, estado_campos
 
 parser = reqparse.RequestParser()
-parser.add_argument('logradouro', required=True)
-parser.add_argument('numero', required=True)
-parser.add_argument('complemento', required=False)
-parser.add_argument('cidade', type=dict, required=False)
-parser.add_argument('estado', type=dict, required=False)
-parser.add_argument('cep', required=True)
-parser.add_argument('ponto_referencia', required=False)
+parser.add_argument('logradouro', required=True, help="Especifique um logradouro válido para o Endereço.")
+parser.add_argument('numero', required=True, help="Especifique um número válido para o Endereço.")
+parser.add_argument('complemento', required=False, help="Especifique um complemento válido para o Endereço.")
+parser.add_argument('cidade', type=dict, required=False, help="Especifique uma cidade válida para o Endereço.")
+parser.add_argument('estado', type=dict, required=False, help="Especifique um estado válido para o Endereço.")
+parser.add_argument('cep', required=True, help="Especifique um cep válido para o Endereço.")
+parser.add_argument('ponto_referencia', required=False, help="Especifique um ponto de referência válido para o Endereço.")
 
 
 class EnderecosResource(Resource):

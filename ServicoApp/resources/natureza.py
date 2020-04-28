@@ -4,7 +4,7 @@ from sqlalchemy import exc
 from models.natureza import NaturezaModel, natureza_campos
 
 parser = reqparse.RequestParser()
-parser.add_argument('tipo', required=True)
+parser.add_argument('tipo', required=True, help="Especifique um tipo válido para a Natureza.")
 
 class NaturezasResource(Resource):
     # GET /naturezas
